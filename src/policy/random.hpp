@@ -15,5 +15,6 @@ public:
 class Random{
 public:
   static Move get_move(State *state, int depth); //get all legal actions
-  int minimax(State *state, int depth, bool maximizingPlayer);
 };
+
+int minimax(State *state, int depth, bool maximizingPlayer);
