@@ -9,8 +9,8 @@
 #include "../config.hpp"
 
 
-typedef std::pair<size_t, size_t> Point;
-typedef std::pair<Point, Point> Move;
+typedef std::pair<size_t, size_t> Point; //position <x,y> of chess piece.
+typedef std::pair<Point, Point> Move;    //move instruction <from,to> of chess piece.
 class Board{
   public:
     char board[2][BOARD_H][BOARD_W] = {{
@@ -47,7 +47,7 @@ class State{
     Board board;
     int score = -1000000000;
     int player = 0;
-    std::vector<Move> legal_actions;
+    std::vector<Move> legal_actions; //vector to store all valid pairs of moves <from,to>.
 
     State(){};
     State(int player): player(player){};

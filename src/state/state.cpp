@@ -12,11 +12,52 @@
  * @return int
  */
 int State::evaluate(){
+  int pawn_value = 2;
+  int rook_value = 6;
+  int knight_value = 7;
+  int bishop_value = 8;
+  int queen_value = 20;
+  int king_value = 1000000000;
   // [TODO] design your own evaluation function
-  // return the value of the pieces??? the subtracted value of pieces?
-  // @this position add all the scores and subtract it against the opponent's...???
-  // WHAT DA FUQQ!!!
-  return 0;
+
+  ///DRAFT
+  // 0 empty, 1 pawn, 2 rook, 3 knight, 4 bishop, 5 queen, 6 king
+  // if (piece == king && king die) return -1000000000;
+  // else if(piece == any_piece && any_piece !die && opp_king die) return 1000000000;
+  // else if()
+
+int score = 0; //default heuristic at 0. My score.
+for(int i=0; i<2; i++){ //select which board to loop through
+  int player = i;
+    for(int j=0; j<6; j++){
+      for(int k=0; k<5; k++){
+        char piece = this->board.board[i][j][k];
+        switch(piece){
+          case '1':
+            score += (player)? pawn_value: -(pawn_value);
+            break;
+          case '2':
+            score += (player)? rook_value: -(rook_value);
+            break; 
+          case '3':
+            score += (player)? knight_value : -(knight_value);
+            break;
+          case '4':
+            score += (player)? bishop_value : -(bishop_value);
+            break;
+          case '5':
+            score += (player)? queen_value : -(queen_value);
+            break;
+          case '6':
+            score += (player)? king_value : -(king_value);
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+  return score; //return heuristic score.
 }
 
 
@@ -211,7 +252,7 @@ void State::get_legal_actions(){
     }
   }
   std::cout << "\n";
-  this->legal_actions = all_actions;
+  this->legal_actions = all_actions; 
 }
 
 
