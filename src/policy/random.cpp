@@ -20,6 +20,7 @@ Move Random::get_move(State *state, int depth){
   auto actions = state->legal_actions;
   return actions[(rand()+depth)%actions.size()];
 }*/
+
 int minimax(State *state, int depth, bool maximizingPlayer){
   int now_res = state->game_state;
   if(now_res == 1){

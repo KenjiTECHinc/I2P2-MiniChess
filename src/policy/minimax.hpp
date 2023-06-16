@@ -11,5 +11,5 @@ using namespace std;
 class Minimax{
 public:
   static Move get_move(State *state, int depth); //get all legal actions
-  static int minimax(State *state, int depth, bool maximizingPlayer);
 };
+int minimax(State *state, int depth, bool maximizingPlayer);
