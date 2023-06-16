@@ -11,6 +11,7 @@ using namespace std;
  * @param depth You may need this for other policy
  * @return Move
  */
+/*
 int minimax(State *state, int depth, bool maximizingPlayer){
   int now_res = state->game_state;
   if(now_res == 1){
@@ -60,4 +61,4 @@ Move Minimax::get_move(State *state, int depth){
 
   return best_move;
 };
-
+*/

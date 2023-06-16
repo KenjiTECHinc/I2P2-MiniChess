@@ -45,7 +45,7 @@ class State{
     //You may want to add more property for a state
     GameState game_state = UNKNOWN;
     Board board;
-    int score = -1000000000;
+    //int score = -1000000000;
     int player = 0;
     std::vector<Move> legal_actions; //vector to store all valid pairs of moves <from,to>.
 

@@ -13,24 +13,24 @@
  */
 int State::evaluate(){
 // [TODO] design your own evaluation function
-const int pawn_value = 2;
+//const int pawn_value = 2;
 const int W_pawn_value[6][5] = {
     0,   0,   0,   0,   0,
    50,  50,  50,  50,  50,
    10,  20,  30,  20,  10,
-   -5,   5,  10,   5,   0, 
-  -10,   0,   0, -10, -20,
+  -10,   5,  10,   5,   0, 
+  -15,   0,   0, -10, -20,
     0,   0,   0,   0,   0
 };
 const int B_pawn_value[6][5] = {
     0,   0,   0,   0,   0,
-  -20, -10,   0,   0, -10,
-    0,   5,  10,   5,  -5,
+  -20, -10,   0,   0, -15,
+    0,   5,  10,   5, -10,
    10,  20,  30,  20,  10, 
    50,  50,  50,  50,  50,
     0,   0,   0,   0,   0
 };
-const int rook_value = 6;
+//const int rook_value = 6;
 const int W_rook_value[6][5] = {
     0,   0,   0,   0,   0,
     5,  10,  10,  10,  10,
@@ -47,12 +47,12 @@ const int B_rook_value[6][5] = {
    10,  10,  10,  10,   5,
     0,   0,   0,   0,   0
 };
-const int knight_value = 7;
+//const int knight_value = 7;
 const int W_knight_value[6][5] = {
   -40, -20, -10, -20, -40,
   -30,   0,   0,   0, -30,
   -10,   5,  10,   5, -20,
-    5,   0,  5,   0, -20, 
+    5,   0,   5,   0, -20, 
   -30,   0,   0,   0, -30,
   -40, -20, -10, -20, -40
 };
@@ -64,7 +64,7 @@ const int B_knight_value[6][5] = {
   -30,   0,   0,   0, -30,
   -40, -20, -10, -20, -40
 };
-const int bishop_value = 8;
+//const int bishop_value = 8;
 const int W_bishop_value[6][5] = {
   -20, -10, -10, -10, -20, 
   -10,   0,   0,   0, -10, 
@@ -81,7 +81,7 @@ const int B_bishop_value[6][5] = {
   -10,   0,   0,   0, -10,
   -20, -10, -10, -10, -20
 };
-const int queen_value = 20;
+//const int queen_value = 20;
 const int W_queen_value[6][5] = {
    -5,  -5, -10, -10, -10,
    -5,   0,   0,   0,   0,
@@ -98,7 +98,7 @@ const int B_queen_value[6][5] = {
     0,   0,   0,   0,   0,
   -10, -10, -10,  -5,  -5
 };
-const int king_value = 1000000000;
+//const int king_value = 1000000000;
 const int W_king_value[6][5] = {
   -50, -50, -40, -40, -30,
   -50, -50, -40, -40, -30,
@@ -124,22 +124,22 @@ for(int i=0; i<2; i++){ //select which board to loop through
         char piece = this->board.board[i][j][k];
         switch(piece){
           case '1':
-            score += (player)? pawn_value: -(pawn_value);
+            score += (player == 0)? W_pawn_value[j][k]: -(B_pawn_value[j][k]);
             break;
           case '2':
-            score += (player)? rook_value: -(rook_value);
+            score += (player == 0)? W_rook_value[j][k]: -(B_rook_value[j][k]);
             break; 
           case '3':
-            score += (player)? knight_value : -(knight_value);
+            score += (player == 0)? W_knight_value[j][k] : -(B_knight_value[j][k]);
             break;
           case '4':
-            score += (player)? bishop_value : -(bishop_value);
+            score += (player == 0)? W_bishop_value[j][k] : -(B_bishop_value[j][k]);
             break;
           case '5':
-            score += (player)? queen_value : -(queen_value);
+            score += (player == 0)? W_queen_value[j][k] : -(B_queen_value[j][k]);
             break;
           case '6':
-            score += (player)? king_value : -(king_value);
+            score += (player == 0)? W_king_value[j][k] : -(B_king_value[j][k]);
             break;
           default:
             break;

@@ -1,5 +1,6 @@
 //algorithm
 #include <cstdlib>
+#include <iostream>
 
 #include "../state/state.hpp"
 #include "./random.hpp"
@@ -67,6 +68,7 @@ Move Random::get_move(State *state, int depth){
       best_score = score;
     }
   }
-
+  //Debug.
+  std::cout << best_move.first.first << " " << best_move.first.second << " " << best_move.second.first << " " << best_move.second.second << std::endl;
   return best_move;
 };
