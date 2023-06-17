@@ -23,15 +23,15 @@ Move Random::get_move(State *state, int depth){
 }*/
 
 int minimax(State *state, int depth, bool maximizingPlayer){
-  int now_res = state->game_state;
-  if(now_res == 1){
-    delete state;
-    return -1000000;
-  }
-  if(now_res==DRAW){
-    delete state;
-    return 0;
-  }
+  // int now_res = state->game_state;
+  // if(now_res == 1 && !maximizingPlayer){
+  //   delete state;
+  //   return 1000000;
+  // }
+  // if(now_res==DRAW){
+  //   delete state;
+  //   return 0;
+  // }
   if(depth==3){
     int score = state->evaluate();
     delete state;
@@ -58,12 +58,13 @@ int minimax(State *state, int depth, bool maximizingPlayer){
 };
 
 Move Random::get_move(State *state, int depth){
-  Move best_move = state->legal_actions[state->legal_actions.size()-1];
-  int best_score = -1000000000;
+  Move best_move = Move(Point(-1,-1),Point(-1,-1));
+  int best_score = -1000000;
 
   for(Move move: state->legal_actions){
-    int score = minimax(state->next_state(move), depth,true);
-    if(score>best_score){
+    int score = minimax(state->next_state(move), depth, true);
+    //if(score > best_score){ // <-- originally this one.
+    if(score>=best_score){ //this part can cause the opening move to be the same. find a new opening move. 
       best_move = move;
       best_score = score;
     }
