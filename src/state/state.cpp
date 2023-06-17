@@ -13,7 +13,8 @@
  */
 int State::evaluate(){
 // [TODO] design your own evaluation function
-//const int pawn_value = 2;
+const int pawn_value = 2;
+/*
 const int W_pawn_value[6][5] = {
     0,   0,   0,   0,   0,
    50,  50,  50,  50,  50,
@@ -30,7 +31,9 @@ const int B_pawn_value[6][5] = {
    50,  50,  50,  50,  50,
     0,   0,   0,   0,   0
 };
-//const int rook_value = 6;
+*/
+const int rook_value = 6;
+/*
 const int W_rook_value[6][5] = {
     0,   0,   0,   0,   0,
     5,  10,  10,  10,  10,
@@ -46,8 +49,9 @@ const int B_rook_value[6][5] = {
    -5,   0,   0,   0,  -5, 
    10,  10,  10,  10,   5,
     0,   0,   0,   0,   0
-};
-//const int knight_value = 7;
+};*/
+const int knight_value = 7;
+/*
 const int W_knight_value[6][5] = {
   -40, -20, -10, -20, -40,
   -30,   0,   0,   0, -30,
@@ -63,8 +67,9 @@ const int B_knight_value[6][5] = {
   -20,   5,  10,   5, -10, 
   -30,   0,   0,   0, -30,
   -40, -20, -10, -20, -40
-};
-//const int bishop_value = 8;
+};*/
+const int bishop_value = 8;
+/*
 const int W_bishop_value[6][5] = {
   -20, -10, -10, -10, -20, 
   -10,   0,   0,   0, -10, 
@@ -80,8 +85,9 @@ const int B_bishop_value[6][5] = {
   -10,   0,   5,   0, -10, 
   -10,   0,   0,   0, -10,
   -20, -10, -10, -10, -20
-};
-//const int queen_value = 20;
+};*/
+const int queen_value = 20;
+/*
 const int W_queen_value[6][5] = {
    -5,  -5, -10, -10, -10,
    -5,   0,   0,   0,   0,
@@ -97,8 +103,9 @@ const int B_queen_value[6][5] = {
     0,   5,   5,   5,   0,
     0,   0,   0,   0,   0,
   -10, -10, -10,  -5,  -5
-};
-//const int king_value = 1000000000;
+};*/
+const int king_value = 1000000000;
+/*
 const int W_king_value[6][5] = {
   -50, -50, -40, -40, -30,
   -50, -50, -40, -40, -30,
@@ -115,7 +122,7 @@ const int B_king_value[6][5] = {
   -30, -40, -40, -50, -50,
   -30, -40, -40, -50, -50
 };
-
+*/
 int score = 0; //default heuristic at 0. My score.
 for(int i=0; i<2; i++){ //select which board to loop through
   int player = i;
@@ -124,22 +131,22 @@ for(int i=0; i<2; i++){ //select which board to loop through
         char piece = this->board.board[i][j][k];
         switch(piece){
           case '1':
-            score += (player == 0)? W_pawn_value[j][k]: -(B_pawn_value[j][k]);
+            score += (player == 0)? pawn_value: -(pawn_value);
             break;
           case '2':
-            score += (player == 0)? W_rook_value[j][k]: -(B_rook_value[j][k]);
+            score += (player == 0)? rook_value: -(rook_value);
             break; 
           case '3':
-            score += (player == 0)? W_knight_value[j][k] : -(B_knight_value[j][k]);
+            score += (player == 0)? knight_value : -(knight_value);
             break;
           case '4':
-            score += (player == 0)? W_bishop_value[j][k] : -(B_bishop_value[j][k]);
+            score += (player == 0)? bishop_value : -(bishop_value);
             break;
           case '5':
-            score += (player == 0)? W_queen_value[j][k] : -(B_queen_value[j][k]);
+            score += (player == 0)? queen_value : -(queen_value);
             break;
           case '6':
-            score += (player == 0)? W_king_value[j][k] : -(B_king_value[j][k]);
+            score += (player == 0)? king_value : -(king_value);
             break;
           default:
             break;
