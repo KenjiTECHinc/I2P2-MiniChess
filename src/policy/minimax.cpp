@@ -11,7 +11,7 @@ using namespace std;
  * @param depth You may need this for other policy
  * @return Move
  */
-/*
+
 int minimax(State *state, int depth, bool maximizingPlayer){
   // int now_res = state->game_state;
   // if(now_res == 1 && !maximizingPlayer){
@@ -47,8 +47,8 @@ int minimax(State *state, int depth, bool maximizingPlayer){
   return best;
 };
 
-Move Random::get_move(State *state, int depth){
-  Move best_move = Move(Point(-1,-1),Point(-1,-1));
+Move Minimax::get_move(State *state, int depth){
+  Move best_move = state->legal_actions[state->legal_actions.size() - 1];
   int best_score = -1000000;
 
   for(Move move: state->legal_actions){
@@ -63,4 +63,4 @@ Move Random::get_move(State *state, int depth){
   //std::cout << best_move.first.first << " " << best_move.first.second << " " << best_move.second.first << " " << best_move.second.second << std::endl;
   return best_move;
 };
-*/
+
