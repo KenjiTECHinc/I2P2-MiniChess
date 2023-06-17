@@ -17,4 +17,4 @@ public:
   static Move get_move(State *state, int depth); //get all legal actions
 };
 
-int minimax(State *state, int depth, bool maximizingPlayer);
+int minimax_alphabeta(State *state, int depth, bool maximizingPlayer, int alpha, int beta);

@@ -1,5 +1,6 @@
 //algorithm
 #include <cstdlib>
+#include <algorithm>
 #include <iostream>
 
 #include "../state/state.hpp"
@@ -22,7 +23,7 @@ Move Random::get_move(State *state, int depth){
   return actions[(rand()+depth)%actions.size()];
 }*/
 
-int minimax(State *state, int depth, bool maximizingPlayer){
+int minimax_alphabeta(State *state, int depth, bool maximizingPlayer, int alpha, int beta){
   // int now_res = state->game_state;
   // if(now_res == 1 && !maximizingPlayer){
   //   delete state;
@@ -41,20 +42,28 @@ int minimax(State *state, int depth, bool maximizingPlayer){
   if(maximizingPlayer){
     best = -1000000;
     for(auto move: state->legal_actions){
-    int score = minimax(state->next_state(move), depth+1,false);
-    if (score>=best)
-      best = score;
+      int score = minimax_alphabeta(state->next_state(move), depth+1,false, alpha, beta);
+      if(score > alpha){
+        if (score>=best) best = score;
+        alpha = score;
+      }
+      if(alpha >= beta) break;
     }
+    return alpha;
   }
   else{
     best = 1000000;
     for(auto move: state->legal_actions){
-    int score = minimax(state->next_state(move), depth+1,true);
-    if (score<=best)
-      best = score;
+      int score = minimax_alphabeta(state->next_state(move), depth+1,true, alpha, beta);
+      if(score < beta){  
+        if (score<=best) best = score;
+        beta = score;
+      }
+      if(alpha >= beta) break;  
     }
+    return beta;
   }
-  return best;
+  //return best;
 };
 
 Move Random::get_move(State *state, int depth){
@@ -62,9 +71,9 @@ Move Random::get_move(State *state, int depth){
   int best_score = -1000000;
 
   for(Move move: state->legal_actions){
-    int score = minimax(state->next_state(move), depth, true);
+    int score = minimax_alphabeta(state->next_state(move), depth, true, -1000000, 1000000);
     //if(score > best_score){ // <-- originally this one.
-    if(score>=best_score){ //this part can cause the opening move to be the same. find a new opening move. 
+    if(score>best_score){ //this part can cause the opening move to be the same. find a new opening move. 
       best_move = move;
       best_score = score;
     }
