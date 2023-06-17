@@ -69,6 +69,6 @@ Move Random::get_move(State *state, int depth){
     }
   }
   //Debug.
-  std::cout << best_move.first.first << " " << best_move.first.second << " " << best_move.second.first << " " << best_move.second.second << std::endl;
+  //std::cout << best_move.first.first << " " << best_move.first.second << " " << best_move.second.first << " " << best_move.second.second << std::endl;
   return best_move;
 };
