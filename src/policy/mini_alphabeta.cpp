@@ -2,11 +2,11 @@
 #include <cstdlib>
 #include <algorithm>
 #include <iostream>
-
+#include <fstream>
 #include "../state/state.hpp"
 #include "./mini_alphabeta.hpp"
 using namespace std;
-
+std::ofstream fout("test.txt", std::ios::app);
 /**
  * @brief Randomly get a legal action
  *
@@ -24,44 +24,41 @@ Move Random::get_move(State *state, int depth){
 }*/
 
 int mini_alphabeta(State *state, int depth, bool maximizingPlayer, int alpha, int beta){
-  // int now_res = state->game_state;
-  // if(now_res == 1 && !maximizingPlayer){
-  //   delete state;
-  //   return 1000000;
-  // }
+//  if(state->game_state == WIN && maximizingPlayer){
+//      delete state;
+//      return -1000000;
+//  }
+//  else if(now_res == 1 && !maximizingPlayer){
+//   delete state;
+//   return 1000000;
+//  }
   // if(now_res==DRAW){
   //   delete state;
   //   return 0;
   // }
-  if(depth==4){
+  if(depth==3){
     int score = state->evaluate();
     delete state;
     return score;
   }
-  int best;
   if(maximizingPlayer){
-    best = -1000000;
+    int best = -1000000;
     for(auto move: state->legal_actions){
-      int score = mini_alphabeta(state->next_state(move), depth+1,false, alpha, beta);
-      if(score > alpha){
-        if (score>=best) best = score;
-        alpha = score;
-      }
+      best = max(best, mini_alphabeta(state->next_state(move), depth+1,false, alpha, beta));
+      alpha = max(alpha, best);
       if(alpha >= beta) break;
     }
-    return alpha;
+    fout << "This is maximizing player's best: "
+    return best;
   }
   else{
-    best = 1000000;
+    int best = 1000000;
     for(auto move: state->legal_actions){
-      int score = mini_alphabeta(state->next_state(move), depth+1,true, alpha, beta);
-      if(score < beta){  
-        if (score<=best) best = score;
-        beta = score;
-      }
-      if(alpha >= beta) break;  
+      best = min(best, mini_alphabeta(state->next_state(move), depth+1,true, alpha, beta));
+      beta = min(beta, best);
+      if(beta <= alpha) break;  
     }
-    return beta;
+    return best;
   }
   //return best;
 };
@@ -79,6 +76,5 @@ Move Mini_AlphaBeta::get_move(State *state, int depth){
     }
   }
   //Debug.
-  //std::cout << best_move.first.first << " " << best_move.first.second << " " << best_move.second.first << " " << best_move.second.second << std::endl;
   return best_move;
 };

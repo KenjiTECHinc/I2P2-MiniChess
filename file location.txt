@@ -7,6 +7,7 @@ C:\Users\Dell G3\OneDrive\เอกสาร\I2P2-MiniChess
 ./build/main ./build/player_minimax ./build/baseline1
 
 ./build/main ./build/player_mini_alphabeta ./build/baseline1
+./build/main ./build/baseline1 ./build/player_mini_alphabeta
 
 ./build/main ./build/baseline2 ./build/player_random
 
@@ -118,3 +119,73 @@ const int B_king_value[6][5] = {
   -30, -40, -40, -50, -50,
   -30, -40, -40, -50, -50
 };
+
+
+int State::evaluate(){
+  // [TODO] design your own evaluation function
+  int pl1=0, pl2=0;
+  for(int i = 0; i<2; i++)
+  {
+    for(int j = 0; j<BOARD_H; j++)
+    {
+      for(int k = 0; k<BOARD_W; k++)
+      {
+        if(i == 0)
+        {
+          if(this->board.board[i][j][k] == '1' || this->board.board[i][j][k] == 1)
+          {
+            pl1 += 2;
+          }
+          if(this->board.board[i][j][k] == '2' || this->board.board[i][j][k] == 2)
+          {
+            pl1 += 6;
+          }
+          if(this->board.board[i][j][k] == '3' || this->board.board[i][j][k] == 3)
+          {
+            pl1 += 7;
+          }
+          if(this->board.board[i][j][k] == '4' || this->board.board[i][j][k] == 4)
+          {
+            pl1 += 8;
+          }
+          if(this->board.board[i][j][k] == '5' || this->board.board[i][j][k] == 5)
+          {
+            pl1 += 20;
+          }
+          if(this->board.board[i][j][k] == '6' || this->board.board[i][j][k] == 6)
+          {
+            pl1 += 100;
+          }
+        }
+        else
+        {
+          if(this->board.board[i][j][k] == '1' || this->board.board[i][j][k] == 1)
+          {
+            pl2 += 2;
+          }
+          if(this->board.board[i][j][k] == '2' || this->board.board[i][j][k] == 2)
+          {
+            pl2 += 6;
+          }
+          if(this->board.board[i][j][k] == '3' || this->board.board[i][j][k] == 3)
+          {
+            pl2 += 7;
+          }
+          if(this->board.board[i][j][k] == '4' || this->board.board[i][j][k] == 4)
+          {
+            pl2 += 8;
+          }
+          if(this->board.board[i][j][k] == '5' || this->board.board[i][j][k] == 5)
+          {
+            pl2 += 20;
+          }
+          if(this->board.board[i][j][k] == '6' || this->board.board[i][j][k] == 6)
+          {
+            pl2 += 100;
+          } 
+        }
+      }
+    }
+  }
+  return pl1 - pl2;
+}
