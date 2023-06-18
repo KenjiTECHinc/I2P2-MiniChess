@@ -1,0 +1,51 @@
+int pawn_value = 2;
+int rook_value = 6;
+int knight_value = 7;
+int bishop_value = 8;
+int queen_value = 20;
+int king_value = 1000;
+
+int score = 0; //default heuristic at 0. My score.
+for(int i=0; i<2; i++){ //select which board to loop through
+  int i_player = i;
+    for(int j=0; j<6; j++){
+      for(int k=0; k<5; k++){
+        auto piece = this->board.board[i][j][k];
+        switch(piece){
+          case 1:
+            score += (i_player == 0)? pawn_value: -(pawn_value);
+            break;
+          case 2:
+            score += (i_player == 0)? rook_value: -(rook_value);
+            break; 
+          case 3:
+            score += (i_player == 0)? knight_value: -(knight_value);
+            break;
+          case 4:
+            score += (i_player == 0)? bishop_value : -(bishop_value);
+            break;
+          case 5:
+            score += (i_player == 0)? queen_value : -(queen_value);
+            break;
+          case 6:
+            score += (i_player == 0)? king_value : -(king_value);
+            break;
+          default:
+            score += 0;
+            break;
+        }
+      }
+    }
+  }
+  return score; //return heuristic score.
+
+
+int ret = 0;
+  for(int i=0; i<6; i++){
+    for(int j=0; j<5; j++){
+      int me = this->board.board[this->player][i][j];
+      int op = this->board.board[!this->player][i][j];
+      ret += me - op;
+    }
+  }
+  return ret;

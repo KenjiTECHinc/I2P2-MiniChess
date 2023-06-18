@@ -6,7 +6,7 @@
 #include "../state/state.hpp"
 #include "./mini_alphabeta.hpp"
 using namespace std;
-std::ofstream fout("test.txt", std::ios::app);
+//std::ofstream fout("test.txt", std::ios::app);
 /**
  * @brief Randomly get a legal action
  *
@@ -24,57 +24,49 @@ Move Random::get_move(State *state, int depth){
 }*/
 
 int mini_alphabeta(State *state, int depth, bool maximizingPlayer, int alpha, int beta){
-//  if(state->game_state == WIN && maximizingPlayer){
-//      delete state;
-//      return -1000000;
-//  }
-//  else if(now_res == 1 && !maximizingPlayer){
-//   delete state;
-//   return 1000000;
-//  }
-  // if(now_res==DRAW){
-  //   delete state;
-  //   return 0;
-  // }
   if(depth==3){
-    int score = state->evaluate();
-    delete state;
-    return score;
+    return state->evaluate();
+    //int score= state->evaluate();
+    //delete state;
+    //return score;
   }
   if(maximizingPlayer){
-    int best = -1000000;
+    int maximize_best = -1000000000;
     for(auto move: state->legal_actions){
-      best = max(best, mini_alphabeta(state->next_state(move), depth+1,false, alpha, beta));
-      alpha = max(alpha, best);
+      maximize_best = max(maximize_best, mini_alphabeta(state->next_state(move), depth+1,false, alpha, beta));
+      alpha = max(alpha, maximize_best);
       if(alpha >= beta) break;
     }
-    fout << "This is maximizing player's best: "
-    return best;
+    //fout << "This is maximizing player's best at depth " << depth << ": " << max_best << endl;
+    return maximize_best;
   }
   else{
-    int best = 1000000;
+    int minimize_best = 1000000000;
     for(auto move: state->legal_actions){
-      best = min(best, mini_alphabeta(state->next_state(move), depth+1,true, alpha, beta));
-      beta = min(beta, best);
+      minimize_best = min(minimize_best, mini_alphabeta(state->next_state(move), depth+1,true, alpha, beta));
+      beta = min(beta, minimize_best);
       if(beta <= alpha) break;  
     }
-    return best;
+    //fout << "This is minimizing player's best at depth " << depth << ": " << min_best << endl;
+    return minimize_best;
   }
   //return best;
 };
 
 Move Mini_AlphaBeta::get_move(State *state, int depth){
-  Move best_move = state->legal_actions[state->legal_actions.size() - 1];
-  int best_score = -1000000;
+  if(!state->legal_actions.size())state->get_legal_actions();
+  Move best_move; //= state->legal_actions[state->legal_actions.size() - 1];
+  int best_score = -1000000000;
 
   for(Move move: state->legal_actions){
-    int score = mini_alphabeta(state->next_state(move), depth, true, -1000000, 1000000);
-    //if(score > best_score){ // <-- originally this one.
+    int score = mini_alphabeta(state->next_state(move), depth, false, -1000000000, 1000000000); //start as minimizer?
     if(score>best_score){ //this part can cause the opening move to be the same. find a new opening move. 
       best_move = move;
       best_score = score;
     }
   }
+  //if(best_move.first == best_move.second) best_move = state->legal_actions[0];
   //Debug.
+  //fout << "Best move is " << best_move.first.first << " " << best_move.first.second << " to " << best_move.second.first << " " << best_move.second.first << endl;
   return best_move;
 };

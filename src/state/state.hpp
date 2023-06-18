@@ -5,11 +5,12 @@
 #include <cstdlib>
 #include <vector>
 #include <utility>
+#include <map>
 
 #include "../config.hpp"
 
 
-typedef std::pair<size_t, size_t> Point; //position <x,y> of chess piece.
+typedef std::pair<size_t, size_t> Point; //position <row, column> of chess piece.
 typedef std::pair<Point, Point> Move;    //move instruction <from,to> of chess piece.
 class Board{
   public:
@@ -48,6 +49,8 @@ class State{
     //int score = -1000000000;
     int player = 0;
     std::vector<Move> legal_actions; //vector to store all valid pairs of moves <from,to>.
+    //std::map<int, int> white_piece;
+    //std::map<int, int> black_piece; 
 
     State(){};
     State(int player): player(player){};
