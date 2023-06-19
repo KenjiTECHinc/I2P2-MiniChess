@@ -24,7 +24,7 @@ Move Random::get_move(State *state, int depth){
 }*/
 
 int mini_alphabeta(State *state, int depth, bool maximizingPlayer, int alpha, int beta){
-  if(depth==3){
+  if(depth==5){
     return state->evaluate();
     //int score= state->evaluate();
     //delete state;

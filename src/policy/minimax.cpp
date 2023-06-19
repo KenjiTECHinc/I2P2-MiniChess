@@ -52,7 +52,7 @@ Move Minimax::get_move(State *state, int depth){
   int best_score = -1000000;
 
   for(Move move: state->legal_actions){
-    int score = minimax(state->next_state(move), depth, true);
+    int score = minimax(state->next_state(move), depth, false);
     //if(score > best_score){ // <-- originally this one.
     if(score>best_score){ //this part can cause the opening move to be the same. find a new opening move. 
       best_move = move;
