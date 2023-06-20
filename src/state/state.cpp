@@ -12,7 +12,7 @@
  * @return int
  */
 int State::evaluate(){
-int piece_lock[7] = {0,1,4,5,6,17,0};
+int piece_lock[7] = {0,1,4,5,6,17,700};
 // int ene_pawn = 1.5;
 // int ene_rook = 3;
 // int ene_knight = 4.5;
@@ -25,7 +25,7 @@ int rook_value = 6;
 int knight_value = 7;
 int bishop_value = 8;
 int queen_value = 20;
-int king_value = 0;
+int king_value = 1000;
 
 int score = 0; //default heuristic at 0. My score.
 for(int i=0; i<2; i++){ //select which board to loop through

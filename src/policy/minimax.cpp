@@ -13,15 +13,6 @@ using namespace std;
  */
 
 int minimax(State *state, int depth, bool maximizingPlayer){
-  // int now_res = state->game_state;
-  // if(now_res == 1 && !maximizingPlayer){
-  //   delete state;
-  //   return 1000000;
-  // }
-  // if(now_res==DRAW){
-  //   delete state;
-  //   return 0;
-  // }
   if(depth==3){
     int score = state->evaluate();
     delete state;
