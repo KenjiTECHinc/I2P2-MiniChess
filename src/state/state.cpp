@@ -507,7 +507,69 @@ for(int i=0; i<2; i++){ //select which board to loop through
                 if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
               }
             //END check knight
-
+            //check queen, rook, bishop
+            for(int l=1; l<6; l++){
+                if(j-l >=0){
+                auto check_enemy = this->board.board[1-i_player][j-l][k];
+                if(check_enemy == '2') score += (i_player == player)? -(500) : (500);
+                else if(check_enemy == '4') score += (i_player == player)? -(500) : (500);
+                else if(check_enemy == '5') score += (i_player == player)? -(500) : (500);
+                else score += piece_lock[0];
+              }
+              if(j+l < BOARD_H){
+                auto check_enemy = this->board.board[1-i_player][j+1][k];
+                if(check_enemy == '2') score += (i_player == player)? -(500) : (500);
+                else if(check_enemy == '4') score += (i_player == player)? -(500) : (500);
+                else if(check_enemy == '5') score += (i_player == player)? -(500) : (500);
+                else score += piece_lock[0];
+              }
+              if(k-l >=0){
+                auto check_enemy = this->board.board[1-i_player][j][k-l];
+                if(check_enemy == '2') score += (i_player == player)? -(500) : (500);
+                else if(check_enemy == '4') score += (i_player == player)? -(500) : (500);
+                else if(check_enemy == '5') score += (i_player == player)? -(500) : (500);
+                else score += piece_lock[0];
+              }
+              if(k+l < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j][k+l];
+                if(check_enemy == '2') score += (i_player == player)? -(500) : (500);
+                else if(check_enemy == '4') score += (i_player == player)? -(500) : (500);
+                else if(check_enemy == '5') score += (i_player == player)? -(500) : (500);
+                else score += piece_lock[0];
+              }
+                //diagonal
+              for(int l=1; l<5; l++){
+                if(j-l >= 0 && k-l >=0){
+                  auto check_enemy = this->board.board[1-i_player][j-l][k-l];
+                  if(check_enemy == '2') score += (i_player == player)? -(500) : (500);
+                  else if(check_enemy == '4') score += (i_player == player)? -(500) : (500);
+                  else if(check_enemy == '5') score += (i_player == player)? -(500) : (500);
+                  else score += piece_lock[0];
+                }
+                if(j-l >=0 && k+l < BOARD_W){
+                  auto check_enemy = this->board.board[1-i_player][j-l][k+l];
+                  if(check_enemy == '2') score += (i_player == player)? -(500) : (500);
+                  else if(check_enemy == '4') score += (i_player == player)? -(500) : (500);
+                  else if(check_enemy == '5') score += (i_player == player)? -(500) : (500);
+                  else score += piece_lock[0];
+                }
+                if(j+l < BOARD_H && k+l < BOARD_W){
+                  auto check_enemy = this->board.board[1-i_player][j+l][k+l];
+                  if(check_enemy == '2') score += (i_player == player)? -(500) : (500);
+                  else if(check_enemy == '4') score += (i_player == player)? -(500) : (500);
+                  else if(check_enemy == '5') score += (i_player == player)? -(500) : (500);
+                  else score += piece_lock[0];
+        
+                }
+                if(j+l < BOARD_H && k-l >=0){
+                  auto check_enemy = this->board.board[1-i_player][j+l][k-l];
+                  if(check_enemy == '2') score += (i_player == player)? -(500) : (500);
+                  else if(check_enemy == '4') score += (i_player == player)? -(500) : (500);
+                  else if(check_enemy == '5') score += (i_player == player)? -(500) : (500);
+                  else score += piece_lock[0];
+                }
+              }
+            }
             score += (i_player == player)? king_value : -(king_value);
             break;
           default:
