@@ -13,12 +13,12 @@
  */
 int State::evaluate(){
 int piece_lock[7] = {0,1,4,5,6,17,700};
-// int ene_pawn = 1.5;
-// int ene_rook = 3;
-// int ene_knight = 4.5;
-// int ene_bishop = 6;
-// int ene_queen = 7.5;
-// int ene_king = 9;
+int ene_pawn = 4;
+int ene_rook = 8;
+int ene_knight = 9;
+int ene_bishop = 10;
+int ene_queen = 22;
+int ene_king = 1100;
 
 int pawn_value = 2;
 int rook_value = 6;
@@ -120,7 +120,7 @@ for(int i=0; i<2; i++){ //select which board to loop through
                 }
               }
             //}
-            score += (i_player == player)? pawn_value: -(pawn_value);
+            score += (i_player == player)? pawn_value: -(ene_pawn);
             break;
           case 2: //rook
             // if(i_player == player){
@@ -167,7 +167,7 @@ for(int i=0; i<2; i++){ //select which board to loop through
               }
             }
             
-            score += (i_player == player)? rook_value: -(rook_value);
+            score += (i_player == player)? rook_value: -(ene_rook);
             break; 
           case 3: //knight
             // if(i_player == player){ //check eatable pieces around knight.
@@ -252,7 +252,7 @@ for(int i=0; i<2; i++){ //select which board to loop through
                 else score += piece_lock[0];
               }
             // }
-            score += (i_player == player)? knight_value: -(knight_value);
+            score += (i_player == player)? knight_value: -(ene_knight);
             break;
           case 4:
             // if(i_player == player){
@@ -300,7 +300,7 @@ for(int i=0; i<2; i++){ //select which board to loop through
                 }
               }
             // }
-            score += (i_player == player)? bishop_value : -(bishop_value);
+            score += (i_player == player)? bishop_value : -(ene_bishop);
             break;
           case 5:
             // if(i_player == player){
@@ -390,7 +390,7 @@ for(int i=0; i<2; i++){ //select which board to loop through
                 }
               }
             }
-            score += (i_player == player)? queen_value : -(queen_value);
+            score += (i_player == player)? queen_value : -(ene_queen);
             break;
           case 6:
             if(j-1 >=0){
@@ -570,7 +570,7 @@ for(int i=0; i<2; i++){ //select which board to loop through
                 }
               }
             }
-            score += (i_player == player)? king_value : -(king_value);
+            score += (i_player == player)? king_value : -(ene_king);
             break;
           default:
             score += 0;
