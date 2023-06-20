@@ -55,7 +55,7 @@ int submission_abp(State *state, int depth, bool maximizingPlayer, int alpha, in
 
 Move submission::get_move(State *state, int depth){
   if(!state->legal_actions.size())state->get_legal_actions();
-  Move best_move; //= state->legal_actions[state->legal_actions.size() - 1];
+  Move best_move = state->legal_actions[state->legal_actions.size() - 1];
   int best_score = -1000000000;
 
   for(Move move: state->legal_actions){
