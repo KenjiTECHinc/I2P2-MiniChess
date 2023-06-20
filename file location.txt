@@ -12,6 +12,11 @@ C:\Users\Dell G3\OneDrive\เอกสาร\I2P2-MiniChess
 ./build/main ./build/player_mini_alphabeta ./build/baseline2
 ./build/main ./build/baseline2 ./build/player_mini_alphabeta
 
+./build/main ./build/player_submission ./build/baseline1
+./build/main ./build/baseline1 ./build/player_submission
+./build/main ./build/player_submission ./build/baseline2
+./build/main ./build/baseline2 ./build/player_submission
+
 ./build/main ./build/player_minimax ./build/player_mini_alphabeta
 ./build/main ./build/player_mini_alphabeta ./build/player_minimax
 
