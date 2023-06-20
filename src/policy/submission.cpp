@@ -65,8 +65,6 @@ Move submission::get_move(State *state, int depth){
       best_score = score;
     }
   }
-  //if(best_move.first == best_move.second) best_move = state->legal_actions[0];
   //Debug.
-  //fout << "Best move is " << best_move.first.first << " " << best_move.first.second << " to " << best_move.second.first << " " << best_move.second.first << endl;
   return best_move;
 };
