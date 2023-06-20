@@ -12,7 +12,7 @@
  * @return int
  */
 int State::evaluate(){
-//int piece_lock[7] = {0,2,6,7,8,20,1000};
+int piece_lock[7] = {0,1,4,5,6,17,700};
 // int ene_pawn = 1.5;
 // int ene_rook = 3;
 // int ene_knight = 4.5;
@@ -36,262 +36,478 @@ for(int i=0; i<2; i++){ //select which board to loop through
         switch(piece){
           case 1: //pawn
             //if(i_player == player){
-              // if(i_player == 0){
-              //   if(j-1 >=0 && k-1 >=0){
-              //     if(this->board.board[1-i_player][j-1][k-1] > 0){
-              //       auto check_enemy = this->board.board[1-i_player][j-1][k-1];
-              //       score += piece_lock[check_enemy];
-              //     }
-              //     if(this->board.board[i_player][j-1][k-1] > 0){
-              //       auto check_ally = this->board.board[i_player][j-1][k-1];
-              //       score += piece_lock[check_ally];
-              //     }
-              //   }
-              //   if(j-1 >=0 && k+1 < BOARD_W){
-              //     if(this->board.board[1-i_player][j-1][k+1] > 0){
-              //       auto check_enemy = this->board.board[1-i_player][j-1][k+1];
-              //       score += piece_lock[check_enemy];
-              //     }
-              //     if(this->board.board[i_player][j-1][k+1] > 0){
-              //       auto check_ally = this->board.board[i_player][j-1][k+1];
-              //       score += piece_lock[check_ally];
-              //     }
-              //   }
-              // }
-              // else if(i_player == 1){
-              //   if(j+1 < BOARD_H && k-1 >=0){
-              //     if(this->board.board[1-i_player][j+1][k-1] > 0){
-              //       auto check_enemy = this->board.board[1-i_player][j+1][k-1];
-              //       score += piece_lock[check_enemy];
-              //     }
-              //     if(this->board.board[i_player][j+1][k-1] > 0){
-              //       auto check_ally = this->board.board[i_player][j+1][k-1];
-              //       score += piece_lock[check_ally];
-              //     }
-              //   }
-              //   if(j+1 < BOARD_H && k+1 < BOARD_W){
-              //     if(this->board.board[1-i_player][j+1][k+1] > 0){
-              //       auto check_enemy = this->board.board[1-i_player][j+1][k+1];
-              //       score += piece_lock[check_enemy];
-              //     }
-              //     if(this->board.board[i_player][j+1][k+1] > 0){
-              //       auto check_ally = this->board.board[i_player][j+1][k+1];
-              //       score += piece_lock[check_ally];
-              //     }
-              //   }
-              // }
+              if(i_player == 0){
+                if(j-1 >=0 && k-1 >=0){
+                    auto check_enemy = this->board.board[1-i_player][j-1][k-1];
+                    if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                    else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                    else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                    else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                    else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                    else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                    else score += piece_lock[0];
+                  
+                    auto check_ally = this->board.board[i_player][j-1][k-1];
+                    if(check_ally == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                    else if(check_ally == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                    else if(check_ally == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                    else if(check_ally == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                    else if(check_ally == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                    else if(check_ally == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                    else score += piece_lock[0];
+                  }
+
+                if(j-1 >=0 && k+1 < BOARD_W){
+                    auto check_enemy = this->board.board[1-i_player][j-1][k+1];
+                    if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                    else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                    else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                    else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                    else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                    else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                    else score += piece_lock[0];
+                  
+
+                    auto check_ally = this->board.board[i_player][j-1][k+1];
+                    if(check_ally == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                    else if(check_ally == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                    else if(check_ally == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                    else if(check_ally == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                    else if(check_ally == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                    else if(check_ally == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                    else score += piece_lock[0];
+                  }
+              }
+              else if(i_player == 1){
+                if(j+1 < BOARD_H && k-1 >=0){
+                    auto check_enemy = this->board.board[1-i_player][j+1][k-1];
+                    if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                    else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                    else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                    else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                    else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                    else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                    else score += piece_lock[0];
+
+                    auto check_ally = this->board.board[i_player][j+1][k-1];
+                    if(check_ally == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                    else if(check_ally == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                    else if(check_ally == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                    else if(check_ally == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                    else if(check_ally == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                    else if(check_ally == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                    else score += piece_lock[0];
+                  }
+                
+                if(j+1 < BOARD_H && k+1 < BOARD_W){
+                    auto check_enemy = this->board.board[1-i_player][j+1][k+1];
+                    if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                    else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                    else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                    else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                    else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                    else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                    else score += piece_lock[0];
+                  
+                    auto check_ally = this->board.board[i_player][j+1][k+1];
+                    if(check_ally == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                    else if(check_ally == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                    else if(check_ally == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                    else if(check_ally == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                    else if(check_ally == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                    else if(check_ally == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                    else score += piece_lock[0];
+                }
+              }
             //}
             score += (i_player == player)? pawn_value: -(pawn_value);
             break;
           case 2: //rook
             // if(i_player == player){
-            // for(int l=1; l< 6; l++){
-            //   if(j-l >=0){
-            //     auto check_enemy = this->board.board[1-i_player][j-l][k];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(j+l < BOARD_H){
-            //     auto check_enemy = this->board.board[1-i_player][j+1][k];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(k-l >=0){
-            //     auto check_enemy = this->board.board[1-i_player][j][k-l];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(k+l < BOARD_W){
-            //     auto check_enemy = this->board.board[1-i_player][j][k+l];
-            //     score += piece_lock[check_enemy];
-            //   }
-            // }
-            // for(int l=1; l<5; l++){
-            //   if(k-l >=0){
-            //     if(this->board.board[1-i_player][j][k-l] > 0){
-            //       auto check_enemy = this->board.board[1- i_player][l][k-l];
-            //       switch(check_enemy){
-            //         case 1:
-            //           score += (i_player == player)? pawn_value : -(pawn_value); 
-            //           break;
-            //         case 2:
-            //           score += (i_player == player)? rook_value: -(rook_value);
-            //           break;
-            //         case 3:
-            //           score += (i_player == player)? knight_value: -(knight_value);
-            //           break;
-            //         case 4:
-            //           score += (i_player == player)? bishop_value : -(bishop_value);
-            //           break;
-            //         case 5:
-            //           score += (i_player == player)? queen_value : -(queen_value);
-            //           break;
-            //         case 6:
-            //           score += (i_player == player)? king_value : -(king_value);
-            //           break;
-            //         default:
-            //           break;
-            //       }
-            //     }
-            //   }
-            //   else break;
-            // }
-            // for(int l=1; l<5; l++){
-            //   if(k+l < BOARD_W){
-            //     if(this->board.board[1-i_player][j][k+l] > 0){
-            //       auto check_enemy = this->board.board[1- i_player][l][k+l];
-            //       switch(check_enemy){
-            //         case 1:
-            //           score += (i_player == player)? pawn_value : -(pawn_value); 
-            //           break;
-            //         case 2:
-            //           score += (i_player == player)? rook_value: -(rook_value);
-            //           break;
-            //         case 3:
-            //           score += (i_player == player)? knight_value: -(knight_value);
-            //           break;
-            //         case 4:
-            //           score += (i_player == player)? bishop_value : -(bishop_value);
-            //           break;
-            //         case 5:
-            //           score += (i_player == player)? queen_value : -(queen_value);
-            //           break;
-            //         case 6:
-            //           score += (i_player == player)? king_value : -(king_value);
-            //           break;
-            //         default:
-            //           break;
-            //       }
-            //     }
-            //   }
-            //   else break;
-            // }
-            //}
+            for(int l=1; l< 6; l++){
+              if(j-l >=0){
+                auto check_enemy = this->board.board[1-i_player][j-l][k];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(j+l < BOARD_H){
+                auto check_enemy = this->board.board[1-i_player][j+1][k];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(k-l >=0){
+                auto check_enemy = this->board.board[1-i_player][j][k-l];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(k+l < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j][k+l];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+            }
+            
             score += (i_player == player)? rook_value: -(rook_value);
             break; 
           case 3: //knight
             // if(i_player == player){ //check eatable pieces around knight.
-            //   if(this->board.board[1-i_player][j-2][k-1] > 0 && j-2 >=0 && k-1 >=0){
-            //     auto check_enemy = this->board.board[1-i_player][j-2][k-1];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(this->board.board[1-i_player][j-2][k+1] > 0 && j-2>=0 && k+1 < BOARD_W){
-            //     auto check_enemy = this->board.board[1-i_player][j-2][k-1];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(this->board.board[1-i_player][j-1][k+2] > 0 && j-1 >=0 && k+2 < BOARD_W){
-            //     auto check_enemy = this->board.board[1-i_player][j-2][k-1];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(this->board.board[1-i_player][j+1][k+2] > 0 && j+1 <BOARD_H && k+2 < BOARD_W){
-            //     auto check_enemy = this->board.board[1-i_player][j-2][k-1];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(this->board.board[1-i_player][j+2][k+1] > 0 && j+2 < BOARD_H && k+1 < BOARD_W){
-            //     auto check_enemy = this->board.board[1-i_player][j-2][k-1];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(this->board.board[1-i_player][j+2][k-1] > 0 && j+2 < BOARD_H && k-1 >=0){
-            //     auto check_enemy = this->board.board[1-i_player][j-2][k-1];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(this->board.board[1-i_player][j+1][k-2] > 0 && j+1 < BOARD_H && k-2 >=0){
-            //     auto check_enemy = this->board.board[1-i_player][j-2][k-1];
-            //     score += piece_lock[check_enemy];
-            //   }
-            //   if(this->board.board[1-i_player][j-1][k-2] > 0 && j-1 >=0 && k-2 >=0){
-            //     auto check_enemy = this->board.board[1-i_player][j-2][k-1];
-            //     score += piece_lock[check_enemy];
-            //   }
+              if(j-2 >=0 && k-1 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(j-2>=0 && k+1 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(j-1 >=0 && k+2 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(j+1 <BOARD_H && k+2 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if( j+2 < BOARD_H && k+1 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(j+2 < BOARD_H && k-1 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(j+1 < BOARD_H && k-2 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(j-1 >=0 && k-2 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
             // }
             score += (i_player == player)? knight_value: -(knight_value);
             break;
           case 4:
             // if(i_player == player){
-            //   for(int l=1; l<5; l++){
-            //     if(j-l >= 0 && k-l >=0){
-            //       if(this->board.board[1-i_player][j-l][k-l] > 0){
-            //         auto check_enemy = this->board.board[1-i_player][j-l][k-l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(j-l >=0 && k+l < BOARD_W){
-            //       if(this->board.board[1-i_player][j-l][k+l] > 0){
-            //         auto check_enemy = this->board.board[1-i_player][j-l][k+l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(j+l < BOARD_H && k+l < BOARD_W){
-            //       if(this->board.board[1-i_player][j+l][k+l] > 0){
-            //         auto check_enemy = this->board.board[1-i_player][j+l][k+l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(j+l < BOARD_H && k-l >=0){
-            //       if(this->board.board[1-i_player][j+l][k-l] > 0){
-            //         auto check_enemy = this->board.board[1-i_player][j+l][k-l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //   }
+              for(int l=1; l<5; l++){
+                if(j-l >= 0 && k-l >=0){
+                  auto check_enemy = this->board.board[1-i_player][j-l][k-l];
+                  if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                  else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                  else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                  else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                  else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                  else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                  else score += piece_lock[0];
+                }
+                if(j-l >=0 && k+l < BOARD_W){
+                  auto check_enemy = this->board.board[1-i_player][j-l][k+l];
+                  if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                  else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                  else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                  else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                  else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                  else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                  else score += piece_lock[0];
+                }
+                if(j+l < BOARD_H && k+l < BOARD_W){
+                  auto check_enemy = this->board.board[1-i_player][j+l][k+l];
+                  if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                  else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                  else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                  else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                  else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                  else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                  else score += piece_lock[0];
+          
+                }
+                if(j+l < BOARD_H && k-l >=0){
+                  auto check_enemy = this->board.board[1-i_player][j+l][k-l];
+                  if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                  else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                  else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                  else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                  else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                  else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                  else score += piece_lock[0];
+                }
+              }
             // }
             score += (i_player == player)? bishop_value : -(bishop_value);
             break;
           case 5:
             // if(i_player == player){
-            //   for(int l=1; l<6; l++){
-            //     if(j-l >=0){
-            //       if(this->board.board[1-i_player][j-l][k] >0){
-            //         auto check_enemy = this->board.board[1-i_player][j+l][k-l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(j+l < BOARD_H){
-            //       if(this->board.board[1-i_player][j+l][k] >0){
-            //         auto check_enemy = this->board.board[1-i_player][j+l][k];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(k-l >=0){
-            //       if(this->board.board[1-i_player][j][k-l] >0){
-            //         auto check_enemy = this->board.board[1-i_player][j][k-l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(k+l < BOARD_W){
-            //       if(this->board.board[1-i_player][j][k+l] >0){
-            //         auto check_enemy = this->board.board[1-i_player][j][k+l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     //diagonal
-            //     if(j-l >= 0 && k-l >=0){
-            //       if(this->board.board[1-i_player][j-l][k-l] > 0){
-            //         auto check_enemy = this->board.board[1-i_player][j-l][k-l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(j-l >=0 && k+l < BOARD_W){
-            //       if(this->board.board[1-i_player][j-l][k+l] > 0){
-            //         auto check_enemy = this->board.board[1-i_player][j-l][k+l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(j+l < BOARD_H && k+l < BOARD_W){
-            //       if(this->board.board[1-i_player][j+l][k+l] > 0){
-            //         auto check_enemy = this->board.board[1-i_player][j+l][k+l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //     if(j+l < BOARD_H && k-l >=0){
-            //       if(this->board.board[1-i_player][j+l][k-l] > 0){
-            //         auto check_enemy = this->board.board[1-i_player][j+l][k-l];
-            //         score += piece_lock[check_enemy];
-            //       }
-            //     }
-            //   }
-
-            // }
+              for(int l=1; l<6; l++){
+                if(j-l >=0){
+                auto check_enemy = this->board.board[1-i_player][j-l][k];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(j+l < BOARD_H){
+                auto check_enemy = this->board.board[1-i_player][j+1][k];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(k-l >=0){
+                auto check_enemy = this->board.board[1-i_player][j][k-l];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+              if(k+l < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j][k+l];
+                if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                else score += piece_lock[0];
+              }
+                //diagonal
+              for(int l=1; l<5; l++){
+                if(j-l >= 0 && k-l >=0){
+                  auto check_enemy = this->board.board[1-i_player][j-l][k-l];
+                  if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                  else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                  else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                  else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                  else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                  else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                  else score += piece_lock[0];
+                }
+                if(j-l >=0 && k+l < BOARD_W){
+                  auto check_enemy = this->board.board[1-i_player][j-l][k+l];
+                  if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                  else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                  else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                  else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                  else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                  else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                  else score += piece_lock[0];
+                }
+                if(j+l < BOARD_H && k+l < BOARD_W){
+                  auto check_enemy = this->board.board[1-i_player][j+l][k+l];
+                  if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                  else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                  else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                  else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                  else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                  else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                  else score += piece_lock[0];
+        
+                }
+                if(j+l < BOARD_H && k-l >=0){
+                  auto check_enemy = this->board.board[1-i_player][j+l][k-l];
+                  if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                  else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                  else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                  else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                  else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                  else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                  else score += piece_lock[0];
+                }
+              }
+            }
             score += (i_player == player)? queen_value : -(queen_value);
             break;
           case 6:
+            if(j-1 >=0){
+              if(k-1 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-1][k-1];
+                if(i_player == 1) if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                // else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                // else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                // else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                // else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                // else score += piece_lock[0];
+              }
+              if(k+1 <BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-1][k+1];
+                if(i_player == 1) if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                // else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                // else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                // else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                // else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                // else score += piece_lock[0];
+              }
+              auto check_enemy = this->board.board[1-i_player][j-1][k];
+              if(i_player == 1) if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+              // else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+              if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+              // else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+              // else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+              // else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+              // else score += piece_lock[0];
+            }
+            if(j+1 < BOARD_H){
+              if(k-1 >=0){
+                auto check_enemy = this->board.board[1-i_player][j+1][k-1];
+                if(i_player == 0) if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                // else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                // else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                // else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                // else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                // else score += piece_lock[0];
+              }
+              if(k+1 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j+1][k+1];
+                if(i_player == 0) if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+                // else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+                if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+                // else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+                // else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+                // else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+                // else score += piece_lock[0];
+              }
+              auto check_enemy = this->board.board[1-i_player][j+1][k];
+              if(i_player == 0) if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+              // else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+              if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+              // else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+              // else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+              // else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+              // else score += piece_lock[0];
+            }
+            if(k-1 >=0){
+              auto check_enemy = this->board.board[1-i_player][j][k-1];
+              if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+              // else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+              else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+              else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+              // else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+              // else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+              // else score += piece_lock[0];
+            }
+            if(k+1 < BOARD_W){
+              auto check_enemy = this->board.board[1-i_player][j][k+1];
+              if(check_enemy == '1') score += (i_player == player)? piece_lock[1] : -(piece_lock[1]);
+              // else if(check_enemy == '2') score += (i_player == player)? piece_lock[2] : -(piece_lock[2]);
+              else if(check_enemy == '3') score += (i_player == player)? piece_lock[3] : -(piece_lock[3]);
+              else if(check_enemy == '4') score += (i_player == player)? piece_lock[4] : -(piece_lock[4]);
+              // else if(check_enemy == '5') score += (i_player == player)? piece_lock[5] : -(piece_lock[5]);
+              // else if(check_enemy == '6') score += (i_player == player)? piece_lock[6] : -(piece_lock[6]);
+              // else score += piece_lock[0];
+            }
+            //check for knights
+            if(j-2 >=0 && k-1 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
+              }
+              if(j-2>=0 && k+1 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
+              }
+              if(j-1 >=0 && k+2 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
+              }
+              if(j+1 <BOARD_H && k+2 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
+              }
+              if( j+2 < BOARD_H && k+1 < BOARD_W){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
+              }
+              if(j+2 < BOARD_H && k-1 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
+              }
+              if(j+1 < BOARD_H && k-2 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
+              }
+              if(j-1 >=0 && k-2 >=0){
+                auto check_enemy = this->board.board[1-i_player][j-2][k-1];
+                if(check_enemy == '3') score += (i_player == player)? -(500) : (500);
+              }
+            //END check knight
+
             score += (i_player == player)? king_value : -(king_value);
             break;
           default:
